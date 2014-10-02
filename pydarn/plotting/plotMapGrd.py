@@ -52,7 +52,8 @@ class MapConv(object):
 
     def __init__(self, startTime, mObj, 
         axisHandle, hemi = 'north', 
-        maxVelScale = 1000., data_coords = 'mag'):
+        maxVelScale = 1000., data_coords = 'mag',
+        fileName=None):
         import datetime
         from pydarn.sdio import *
         from pydarn.radar import *
@@ -85,11 +86,10 @@ class MapConv(object):
         # This is the way I'm setting stuff up to avoid confusion of reading and plotting seperately.
         # Just give the date/hemi and the code reads the corresponding rec
         endTime = startTime + datetime.timedelta(minutes=2)
-        grdPtr = sdDataOpen(startTime, hemi=hemi, eTime=endTime)
-        self.grdData = sdDataReadRec(grdPtr)
         mapPtr = sdDataOpen(startTime, hemi=hemi, eTime=endTime, 
-                            fileType='mapex')
+                            fileType="map", fileName=fileName)
         self.mapData = sdDataReadRec(mapPtr)
+        self.grdData = self.mapData.grid
 
     def overlayGridVel(self, pltColBar=True, 
         overlayRadNames=True, annotateTime=True, 
