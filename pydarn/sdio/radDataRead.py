@@ -100,6 +100,8 @@ def radDataOpen(sTime,radcode,eTime=None,channel=None,bmnum=None,cp=None,\
   Written by AJ 20130110
   """
   from pydarn.sdio import radDataPtr
+  from pydarn.radar import network
+
   myPtr = radDataPtr(sTime=sTime,radcode=radcode,eTime=eTime,            \
                channel=channel,bmnum=bmnum,cp=cp,fileType=fileType,      \
                filtered=filtered,src=src,fileName=fileName,              \
@@ -108,6 +110,7 @@ def radDataOpen(sTime,radcode,eTime=None,channel=None,bmnum=None,cp=None,\
                remote_dirfmt=remote_dirfmt,remote_dict=remote_dict,      \
                remote_fnamefmt=remote_fnamefmt,remote_site=remote_site,  \
                username=username,port=port,password=password,            \
+               stid=int(network().getRadarByCode(radcode).id),           \
                tmpdir=tmpdir)
   return myPtr
   
