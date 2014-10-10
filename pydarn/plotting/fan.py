@@ -45,7 +45,7 @@ def plotFan(sTime,rad,interval=60,fileType='fitex',param='velocity',filtered=Fal
         scale=[],channel='a',coords='geo',colors='lasse',gsct=False,fov=True,edgeColors='face',lowGray=False,fill=True,\
         velscl=1000.,legend=True,overlayPoes=False,poesparam='ted',poesMin=-3.,poesMax=0.5, \
         poesLabel=r"Total Log Energy Flux [ergs cm$^{-2}$ s$^{-1}$]",overlayBnd=False, \
-        show=True,png=False,pdf=False,dpi=500,tFreqBands=[]):
+        show=True,png=False,pdf=False,dpi=500,tFreqBands=[],return_map_fig=False):
 
     """A function to make a fan plot
     
@@ -141,7 +141,9 @@ def plotFan(sTime,rad,interval=60,fileType='fitex',param='velocity',filtered=Fal
     myFiles = []
     myBands = []
     for i in range(len(rad)):
-        f = radDataOpen(sTime,rad[i],sTime+dt.timedelta(seconds=interval),fileType=fileType,filtered=filtered,channel=channel)
+        f = radDataOpen(sTime,rad[i],eTime=sTime + \
+dt.timedelta(seconds=interval), fileType=fileType, filtered=filtered,
+                        channel=channel)
         if(f != None): 
             myFiles.append(f)
             myBands.append(tbands[i])
@@ -159,7 +161,9 @@ def plotFan(sTime,rad,interval=60,fileType='fitex',param='velocity',filtered=Fal
     for i in range(len(myFiles)):
         #read until we reach start time
         allBeams[i] = radDataReadRec(myFiles[i])
-        while (allBeams[i].time < sTime and allBeams[i] != None):
+        while (allBeams[i] is not None):
+            if allBeams[i].time >= sTime:
+                break
             allBeams[i] = radDataReadRec(myFiles[i])
 
         #check that the file has data in the target interval
@@ -375,6 +379,9 @@ def plotFan(sTime,rad,interval=60,fileType='fitex',param='velocity',filtered=Fal
         myFig.savefig(sTime.strftime("%Y%m%d.%H%M.")+str(interval)+'.fan.pdf')
     if show:
         myFig.show()
+
+    if return_map_fig:
+        return myMap, myFig
 
 def overlayFan(myData,myMap,myFig,param,coords='geo',gsct=0,site=None,\
                                 fov=None,gs_flg=[],fill=True,velscl=1000.,dist=1000.,

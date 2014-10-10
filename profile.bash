@@ -61,13 +61,17 @@ export DAVIT_TMPDIR='/tmp/sd/'
 export DAVIT_REMOTE_DIRFORMAT='data/{year}/{ftype}/{radar}/'
 export DAVIT_REMOTE_FNAMEFMT='{date}.{hour}......{radar}.{ftype},{date}.{hour}......{radar}.{channel}.{ftype}'
 
-export DAVIT_LOCAL_DIRFORMAT='/sd-data/{year}/{ftype}/{radar}/'
-export DAVIT_LOCAL_FNAMEFMT='{date}.{hour}......{radar}.{ftype},{date}.{hour}......{radar}.{channel}.{ftype}'
+#export DAVIT_LOCAL_DIRFORMAT='/sd-data/{year}/{ftype}/{radar}/'
+#export DAVIT_LOCAL_FNAMEFMT='{date}.{hour}......{radar}.{ftype},{date}.{hour}......{radar}.{channel}.{ftype}'
+export DAVIT_LOCAL_DIRFORMAT='/chapman/data/fitcon/{year}/{month}/'
+export DAVIT_LOCAL_FNAMEFMT='{date}.C0.{radar}.{ftype},{date}.C0.{radar}.{channel}.{ftype},{date}00{radar}C.{ftype}'
 
 
 # SD FILES 
 export DAVIT_SD_REMOTE_DIRFORMAT='data/{year}/{ftype}/{hemi}/'
 export DAVIT_SD_REMOTE_FNAMEFMT='{date}.{hemi}.{ftype}'
 
-export DAVIT_SD_LOCAL_DIRFORMAT='/sd-data/{year}/{ftype}/{hemi}/'
-export DAVIT_SD_LOCAL_FNAMEFMT='{date}.{hemi}.{ftype}'
+#export DAVIT_SD_LOCAL_DIRFORMAT='/sd-data/{year}/{ftype}/{hemi}/'
+#export DAVIT_SD_LOCAL_FNAMEFMT='{date}.{hemi}.{ftype}'
+export DAVIT_SD_LOCAL_DIRFORMAT='/chapman/data/mapfiles/{year}/{month}/'
+export DAVIT_SD_LOCAL_FNAMEFMT='{date}{hemi}.{ftype}'
