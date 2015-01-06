@@ -185,7 +185,7 @@ class sdDataPtr():
     
                     if local_dict is None:
                         local_dict = {'hemi':hemi, 'ftype':ftype}
-    
+
                     if local_fnamefmt is None:
                         try:
                             local_fnamefmt = os.environ['DAVIT_SD_LOCAL_FNAMEFMT'].split(',')
@@ -194,7 +194,6 @@ class sdDataPtr():
                             print 'Environment variable DAVIT_SD_LOCAL_FNAMEFMT not set, using default:',local_fnamefmt
                     
                     outdir = tmpDir
-    
     
                     #fetch the local files
                     filelist = fetch_local_files(self.sTime, self.eTime, local_dirfmt, local_dict, outdir, \
