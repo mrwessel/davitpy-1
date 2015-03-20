@@ -130,8 +130,8 @@ def fetch_local_files(stime, etime, localdirfmt, localdict, outdir, fnamefmt,
         * **etime**      (datetime): data ending time
         * **localdirfmt**     (str): string defining the local directory structure
                                      (eg "{ftype}/{year}/{month}/{day}/")
-        * **localdict**      (dict): Contains keys for non-time related information in remotedirfmt 
-                                     and fnamefmt (eg remotedict={'ftype':'fitex','radar':'sas','channel':'a'})
+        * **localdict**      (dict): Contains keys for non-time related information in localdirfmt 
+                                     and fnamefmt (eg localdict={'ftype':'fitex','radar':'sas','channel':'a'})
         * **outdir**          (str): Temporary directory in which to store
                                      uncompressed files (must end with a "/")
         * **fnamefmt**   (str/list): Optional string or list of file name formats (eg 
@@ -278,7 +278,7 @@ def fetch_local_files(stime, etime, localdirfmt, localdict, outdir, fnamefmt,
             ctime = ctime + relativedelta(minutes=base_time_inc)
         elif ("{hour}" in namefmt):
             ctime = ctime + relativedelta(hours=base_time_inc)
-        elif (("{date}" in namefmt) or ("{day}" in remotedirfmt)):
+        elif (("{date}" in namefmt) or ("{day}" in localdirfmt)):
             ctime = ctime + relativedelta(days=base_time_inc)
         elif ("{month}" in namefmt):
             ctime = ctime + relativedelta(months=base_time_inc)
